@@ -1,7 +1,9 @@
 from flask import Flask, render_template
+from datetime import timedelta
+
 import requests
 app = Flask(__name__, template_folder='templates')
-
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = timedelta(seconds=1)
 @app.route('/')
 def home():
     rfi = requests.get("https://grist-ej.bballou.com/api/docs/cQbcmAcNgJ1u5YApQyF8WH/sql?q=SELECT COUNT(Number) FROM RFI_Log WHERE Status = 'Open'", headers={
