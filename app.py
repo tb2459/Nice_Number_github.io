@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 import requests
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 @app.route('/')
 def home():
@@ -9,10 +9,10 @@ def home():
 })
 
 
-    val = rfi.json()['records'][0]['fields']['COUNT(Number)']
+    number = rfi.json()['records'][0]['fields']['COUNT(Number)']
     return render_template(
         'index.html',
-        val=rfi.json()['records'][0]['fields']['COUNT(Number)']
+        val=number
       
     )
 

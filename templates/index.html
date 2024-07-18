@@ -25,9 +25,9 @@
 </head>
 <body>
 
-<div id="numberDisplay" class="number"> are {{ val }} RFIs that are open</div>
+<div id="numberDisplay" class="number">There are {{ val }} RFIs that are open</div>
 
-<script>
+<!-- <script>
   // Example: Fetching the number of open RFIs from an API and updating the DOM
   const url = new URL('https://grist-ej.bballou.com/api/docs/cQbcmAcNgJ1u5YApQyF8WH/sql');
   url.searchParams.set('q', "SELECT COUNT(Number) FROM RFI_Log WHERE Status = 'Open'");
@@ -48,7 +48,7 @@
       console.error('Error fetching the open RFIs:', error);
       document.getElementById('numberDisplay').textContent = 'Failed to load RFIs';
     });
-  </script>
+  </script> -->
 
 </body>
 </html>
