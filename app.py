@@ -14,7 +14,7 @@ def home():
     number = rfi.json()['records'][0]['fields']['COUNT(Number)']
     return render_template(
         'index.html',
-        val=19
+        val=number
       
     )
 
