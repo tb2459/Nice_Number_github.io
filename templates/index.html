@@ -1,54 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stylish Number</title>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-<style>
-  .number {
-  font-size: 48px; /* Large font size for visibility */
-  color: #3498db; /* A pleasant blue color */
-  font-family: 'Arial', sans-serif; /* Clean, readable font */
-  background-color: #f0f0f0; /* Light grey background for contrast */
-  padding: 20px; /* Padding around the number for space */
-  border-radius: 10px; /* Rounded corners for a modern look */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  text-align: center; /* Center-align the number */
-  margin: 20px auto; /* Center the block horizontally */
-  display: block; /* Use block to apply margin and padding */
-  width: fit-content; /* Only be as wide as its content */
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .highlight {
+            color: maroon;
+            font-weight: bold;
+            font-size: 28px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .highlight .value {
+            font-weight: 900;
+            font-size: 32px;
+        }
+        .highlight .value.orange {
+            color: orange;
+        }
+        .highlight .value.blue {
+            color: blue;
+        }
+        #messageDisplay {
+            text-align: center;
+            margin-top: 50px;
+            width: 100%;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+        .navbar a {
+            text-decoration: none;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        .navbar a#rfiLink {
+            color: blue;
+            background-color: lightgray;
+        }
+        .navbar a#nocLink {
+            color: green;
+            background-color: lightyellow;
+        }
+        .navbar a#incomingcorrespondenceLink {
+            color: purple;
+            background-color: lightpink;
+        }
+        .navbar a#outgoingcorrespondenceLink,
+        .navbar a#projectManagersLink {
+            color: rgb(235, 228, 226);
+            background-color: rgb(88, 43, 50);
+        }
+        .message {
+            color: navy;
+            font-weight: bold;
+            font-size: 28px;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .message .value {
+            color: red;
+            font-weight: 900;
+            font-size: 32px;
+        }
+        .centered-image {
+            max-width: 80%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
+    <div class="navbar">
+        <a href="#" id="rfiLink">RFI</a>
+        <a href="#" id="nocLink">NOC</a>
+        <a href="#" id="incomingcorrespondenceLink">Incoming Correspondence</a>
+        <a href="#" id="outgoingcorrespondenceLink">Outgoing Correspondence</a>
+        <a href="/PM" id="projectManagersLink">Project Managers</a>
+    </div>
+    <img src="/static/chicago-booth-construction.jpg" alt="Chicago Booth Construction" class="centered-image">
 
-<div id="numberDisplay" class="number">There are {{ val }} RFIs that are open</div>
+    <div id="messageDisplay"><span class="message">There are <span class="value">{{ val }}</span> RFIs that are open</span></div>
 
-<!-- <script>
-  // Example: Fetching the number of open RFIs from an API and updating the DOM
-  const url = new URL('https://grist-ej.bballou.com/api/docs/cQbcmAcNgJ1u5YApQyF8WH/sql');
-  url.searchParams.set('q', "SELECT COUNT(Number) FROM RFI_Log WHERE Status = 'Open'");
-  fetch(url.href, // Fetch the URL
     
-    {
-      'Authorization': 'Bearer 7649966e88b32725ebd633ec124ab052414bb618', // Replace YOUR_API_KEY_HERE with your actual API key
-      // Add any other headers required by the API
-    }
-  )
-    .then(response => response.json()) // Parse the JSON from the response
-    .then(data => {
-      console.log(data); // Log the data to the console for inspection
-      // Assuming 'data' is an object with a property 'openRFIs' that holds the number
-      document.getElementById('numberDisplay').textContent = `There seems to be ${data.openRFIs} RFIs that are open`;
-    })
-    .catch(error => {
-      console.error('Error fetching the open RFIs:', error);
-      document.getElementById('numberDisplay').textContent = 'Failed to load RFIs';
-    });
-  </script> -->
 
+    <script>
+        
+        // Function to display RFI message
+        function displayRFIMessage() {
+            
+            document.getElementById('messageDisplay').innerHTML = '<span style="color: navy; font-weight: bold; font-size: 28px; background-color: #f0f0f0; padding: 10px; border-radius: 10px;">There are <span style="color: red; font-weight: 900; font-size: 32px;">{{ val }}</span> RFIs that are open</span>';
+        }
+
+        // Function to display NOC message
+        function displayNOCMessage() {
+            document.getElementById('messageDisplay').innerHTML = '<span style="color: darkgreen; font-weight: bold; font-size: 28px; background-color: #f0f0f0; padding: 10px; border-radius: 10px;">There are <span style="color: red; font-weight: 900; font-size: 32px;">{{ val2 }}</span> NOCs that are open and have a potential schedule impact</span>';
+        }
+
+        // Function to display Incoming Correspondence message
+        function displayIncomingCorrespondenceMessage() {
+            document.getElementById('messageDisplay').innerHTML = '<span style="color: maroon; font-weight: bold; font-size: 28px; background-color: #f0f0f0; padding: 10px; border-radius: 10px;">There are <span style="color: orange; font-weight: 900; font-size: 32px;">{{ val3 }}</span> Correspondences that are incoming to E-J and Open</span>';
+        }
+
+        function displayOutgoingCorrespondenceMessage() {
+            document.getElementById('messageDisplay').innerHTML = '<span style="color: maroon; font-weight: bold; font-size: 28px; background-color: #f0f0f0; padding: 10px; border-radius: 10px;">There are <span style="color: blue; font-weight: 900; font-size: 32px;">{{ val4 }}</span> Correspondences that are outgoing by E-J and Open</span>';
+        }
+
+        document.getElementById('rfiLink').addEventListener('click', displayRFIMessage);
+        document.getElementById('nocLink').addEventListener('click', displayNOCMessage);
+        document.getElementById('incomingcorrespondenceLink').addEventListener('click', displayIncomingCorrespondenceMessage);
+        document.getElementById('outgoingcorrespondenceLink').addEventListener('click', displayOutgoingCorrespondenceMessage);
+    </script>
 </body>
 </html>

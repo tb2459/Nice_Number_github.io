@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JC Page</title>
+    <style>
+        .navbar a {
+            color: blue;
+            text-decoration: none;
+            padding: 10px;
+            background-color: lightgray;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 5px;
+            margin-right: 10px; /* Adds space between links */
+        }
+        .navbar a:last-child {
+            margin-right: 0; /* Removes the margin from the last link */
+        }
+        #messageDisplay {
+            color: maroon;
+            font-weight: bold;
+            font-size: 28px;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        #messageDisplay span {
+            color: blue;
+            font-weight: 900;
+            font-size: 32px;
+        }
+    
+        #rfiMessage {
+            color: navy;
+            font-weight: bold;
+            font-size: 28px;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        #rfiMessage span {
+            color: red;
+            font-weight: 900;
+            font-size: 32px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/" style="color: blue; text-decoration: none; padding: 10px; background-color: lightgray; font-weight: bold; font-size: 18px; border-radius: 5px;">Home</a>
+        <a href="javascript:window.history.back();" style="color: blue; text-decoration: none; padding: 10px; background-color: lightgray; font-weight: bold; font-size: 18px; border-radius: 5px;">Back</a>
+    </div>
+    <div id="messageDisplay">This is your page Joe</div>
+    <div id="rfiMessage"></div>
+    <script>
+        // Get the messageDisplay element
+        const messageDisplay = document.getElementById('messageDisplay');
+        
+        // Set the inner HTML of the messageDisplay element
+        messageDisplay.innerHTML = 'You have got <span>{{ change }}</span> changes that are Open';
+
+        // Get the rfiMessage element
+        const rfiMessage = document.getElementById('rfiMessage');
+
+        // Set the inner HTML of the rfiMessage element
+        rfiMessage.innerHTML = 'There are <span>{{ rfi }}</span> RFIs that are open';
+        
+    </script>
+</body>
+</html>
