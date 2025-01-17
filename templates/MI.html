@@ -4,58 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MI Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        body {
+            background-color: #f8f9fa; /* Light gray background color */
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); /* Subtle pattern background */
+            font-family: 'Roboto', sans-serif; /* Set a clean font */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Align content to the top */
+            height: 100vh; /* Ensure the body takes the full height of the viewport */
+            color: #333; /* Default text color */
+        }
+        .navbar {
+            display: flex;
+            justify-content: center; /* Centers the navbar items horizontally */
+            background-color: #343a40; /* Dark background color */
+            width: 100%;
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+        }
         .navbar a {
-            color: blue;
+            color: white;
             text-decoration: none;
-            padding: 10px;
-            background-color: lightgray;
+            padding: 10px 15px; /* Adjusted padding to bring buttons closer */
             font-weight: bold;
             font-size: 18px;
             border-radius: 5px;
-            margin-right: 10px; /* Adds space between links */
+            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+            margin: 0 5px; /* Adds space between the buttons */
         }
-        .navbar a:last-child {
-            margin-right: 0; /* Removes the margin from the last link */
+        .navbar a:hover {
+            background-color: #495057; /* Darker shade for hover effect */
         }
-        #messageDisplay {
-            color: maroon;
-            font-weight: bold;
-            font-size: 28px;
-            background-color: #f0f0f0;
-            padding: 10px;
+        .info {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 20px;
+            color: #333;
+            background-color: #fff;
+            padding: 15px;
             border-radius: 10px;
-            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+            width: 80%;
+            max-width: 600px;
         }
-        #messageDisplay span {
-            color: blue;
-            font-weight: 900;
-            font-size: 32px;
-        }
-    
-        #rfiMessage {
-            color: navy;
+        .info span {
             font-weight: bold;
-            font-size: 28px;
-            background-color: #f0f0f0;
-            padding: 10px;
-            border-radius: 10px;
-            margin-top: 20px;
+            color: #007bff; /* Bootstrap primary color */
         }
-        #rfiMessage span {
-            color: red;
-            font-weight: 900;
-            font-size: 32px;
+        footer {
+            background-color: #343a40; /* Dark background color */
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center; /* Centers the buttons horizontally */
+            margin-top: 20px; /* Optional: Adds some space above the buttons */
+            flex-wrap: wrap; /* Allows buttons to wrap to the next line if needed */
+        }
+        .button-container a {
+            margin: 10px; /* Adds space between the buttons */
+            display: inline-block;
+            padding: 15px 30px; /* Increased padding for a larger button */
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px; /* Rounded button */
+            font-weight: bold;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effect */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+        }
+        .button-container a:hover {
+            background-color: #0056b3; /* Darker shade for hover effect */
+            transform: translateY(-2px); /* Slight lift on hover */
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Welcome to MI Page</h1>
+    </header>
     <div class="navbar">
-        <a href="/" style="color: blue; text-decoration: none; padding: 10px; background-color: lightgray; font-weight: bold; font-size: 18px; border-radius: 5px;">Home</a>
-        <a href="javascript:window.history.back();" style="color: blue; text-decoration: none; padding: 10px; background-color: lightgray; font-weight: bold; font-size: 18px; border-radius: 5px;">Back</a>
+        <a href="/" style="background-color: #007bff;">Home</a>
+        <a href="javascript:window.history.back();" style="background-color: #007bff;">Back</a>
     </div>
-    <div id="messageDisplay">This is your page Marc</div>
-    <div id="rfiMessage"></div>
+    <div class="info" id="messageDisplay">This is your page Marc</div>
+    <div class="info" id="rfiMessage"></div>
+    <div class="info" id="submittalMessage"></div>
+    <div class="info" id="correspondenceMessage"></div>
+    <div class="button-container">
+        <a id="openChangesButton" href="#" data-change="{{ change }}">View Open Changes</a>
+        <a id="openRFIButton" href="#" data-change="{{ rfi }}">View Open RFIs</a>
+        <a id="openSubmittalButton" href="#" data-change="{{ submittal }}">View Open Submittals</a>
+        <a id="openCorrespondenceButton" href="#" data-change="{{ corr }}">View Open Correspondence</a>
+    </div>
+    <footer>
+        &copy; 2025 MI Page. All rights reserved.
+    </footer>
     <script>
         // Get the messageDisplay element
         const messageDisplay = document.getElementById('messageDisplay');
@@ -68,7 +123,86 @@
 
         // Set the inner HTML of the rfiMessage element
         rfiMessage.innerHTML = 'There are <span>{{ rfi }}</span> RFIs that are open';
-        
+
+        // Get the submittalMessage element
+        const submittalMessage = document.getElementById('submittalMessage');
+
+        // Set the inner HTML of the submittalMessage element
+        submittalMessage.innerHTML = 'There are <span>{{ submittal }}</span> submittals that are submitted';
+
+        // Get the correspondenceMessage element
+        const correspondenceMessage = document.getElementById('correspondenceMessage');
+
+        // Set the inner HTML of the correspondenceMessage element
+        correspondenceMessage.innerHTML = 'There are <span>{{ corr }}</span> correspondences that are open';
+
+        // Get the openChangesButton element
+        const openChangesButton = document.getElementById('openChangesButton');
+
+        // Set the href attribute of the openChangesButton element
+        openChangesButton.href = 'https://grist.ej1899.com/7BSTDSBvrBZS/Master-Database/p/251'; // Replace with the actual URL
+
+        // Get the change value from the data attribute
+        const changeValue = parseInt(openChangesButton.getAttribute('data-change'), 10);
+
+        // Update the button text with the change count
+        openChangesButton.innerHTML = `View Open Changes (${changeValue})`;
+
+        // Check if the change value is too high and update the button's style
+        if (changeValue > 5) { // Replace 5 with the threshold value
+            openChangesButton.style.backgroundColor = '#8B0000'; // Dark red color
+        }
+
+        // Get the openRFIButton element
+        const openRFIButton = document.getElementById('openRFIButton');
+
+        // Set the href attribute of the openRFIButton element
+        openRFIButton.href = 'https://example.com/open-rfis'; // Replace with the actual URL
+
+        // Get the rfi value from the data attribute
+        const rfiValue = parseInt(openRFIButton.getAttribute('data-change'), 10);
+
+        // Update the button text with the rfi count
+        openRFIButton.innerHTML = `View Open RFIs (${rfiValue})`;
+
+        // Check if the rfi value is too high and update the button's style
+        if (rfiValue > 5) { // Replace 5 with the threshold value
+            openRFIButton.style.backgroundColor = '#8B0000'; // Dark red color
+        }
+
+        // Get the openSubmittalButton element
+        const openSubmittalButton = document.getElementById('openSubmittalButton');
+
+        // Set the href attribute of the openSubmittalButton element
+        openSubmittalButton.href = 'https://example.com/open-submittals'; // Replace with the actual URL
+
+        // Get the submittal value from the data attribute
+        const submittalValue = parseInt(openSubmittalButton.getAttribute('data-change'), 10);
+
+        // Update the button text with the submittal count
+        openSubmittalButton.innerHTML = `View Open Submittals (${submittalValue})`;
+
+        // Check if the submittal value is too high and update the button's style
+        if (submittalValue > 5) { // Replace 5 with the threshold value
+            openSubmittalButton.style.backgroundColor = '#8B0000'; // Dark red color
+        }
+
+        // Get the openCorrespondenceButton element
+        const openCorrespondenceButton = document.getElementById('openCorrespondenceButton');
+
+        // Set the href attribute of the openCorrespondenceButton element
+        openCorrespondenceButton.href = 'https://example.com/open-correspondence'; // Replace with the actual URL
+
+        // Get the correspondence value from the data attribute
+        const correspondenceValue = parseInt(openCorrespondenceButton.getAttribute('data-change'), 10);
+
+        // Update the button text with the correspondence count
+        openCorrespondenceButton.innerHTML = `View Open Correspondence (${correspondenceValue})`;
+
+        // Check if the correspondence value is too high and update the button's style
+        if (correspondenceValue > 5) { // Replace 5 with the threshold value
+            openCorrespondenceButton.style.backgroundColor = '#8B0000'; // Dark red color
+        }
     </script>
 </body>
 </html>

@@ -5,6 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JC Page</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #495057;
+            padding: 10px 0;
+        }
         .navbar a {
             color: blue;
             text-decoration: none;
@@ -18,6 +36,9 @@
         .navbar a:last-child {
             margin-right: 0; /* Removes the margin from the last link */
         }
+        .navbar a:hover {
+            background-color: #5a6268;
+        }
         #messageDisplay {
             color: maroon;
             font-weight: bold;
@@ -26,36 +47,56 @@
             padding: 10px;
             border-radius: 10px;
             margin-top: 20px;
+            width: 80%;
+            margin: 20px auto;
+            text-align: center;
         }
         #messageDisplay span {
             color: blue;
             font-weight: 900;
             font-size: 32px;
         }
-    
         #rfiMessage {
-            color: navy;
+            color: maroon;
             font-weight: bold;
             font-size: 28px;
             background-color: #f0f0f0;
             padding: 10px;
             border-radius: 10px;
             margin-top: 20px;
+            width: 80%;
+            margin: 20px auto;
+            text-align: center;
         }
         #rfiMessage span {
             color: red;
             font-weight: 900;
             font-size: 32px;
         }
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Welcome to JC Page</h1>
+    </header>
     <div class="navbar">
         <a href="/" style="color: blue; text-decoration: none; padding: 10px; background-color: lightgray; font-weight: bold; font-size: 18px; border-radius: 5px;">Home</a>
         <a href="javascript:window.history.back();" style="color: blue; text-decoration: none; padding: 10px; background-color: lightgray; font-weight: bold; font-size: 18px; border-radius: 5px;">Back</a>
     </div>
     <div id="messageDisplay">This is your page Joe</div>
     <div id="rfiMessage"></div>
+    <footer>
+        &copy; 2023 JC Page. All rights reserved.
+    </footer>
     <script>
         // Get the messageDisplay element
         const messageDisplay = document.getElementById('messageDisplay');
