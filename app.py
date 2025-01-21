@@ -61,17 +61,25 @@ def MI():
     rfi_MI = requests.get("https://grist.ej1899.com/api/docs/7BSTDSBvrBZSQhuc3FsLhA/sql?q=SELECT COUNT(Number) FROM RFI_Log WHERE Status = 'Open' AND Manager=10", headers={
      'Authorization': 'Bearer f33e0ae5f9d06e9fa3c9e09f87bb88ecc4cf3848'})
 
-    submittals_MI = requests.get("https://grist.ej1899.com/api/docs/7BSTDSBvrBZSQhuc3FsLhA/sql?q=SELECT COUNT(Description) FROM Submittal_Revisions WHERE Status = 'Submitted' AND Responsible_PM=10", headers={
+    submittals_MI = requests.get("https://grist.ej1899.com/api/docs/7BSTDSBvrBZSQhuc3FsLhA/sql?q=SELECT COUNT(Description) FROM Submittal_Revisions WHERE (Status = 'Submitted' or Status = 'Pending') AND Responsible_PM=10", headers={
         'Authorization': 'Bearer f33e0ae5f9d06e9fa3c9e09f87bb88ecc4cf3848'})
     
     correspondence_MI = requests.get("https://grist.ej1899.com/api/docs/7BSTDSBvrBZSQhuc3FsLhA/sql?q=SELECT COUNT(Number) FROM Correspondence WHERE Status = 'Open' AND Responsibility = 10", headers={
+        'Authorization': 'Bearer f33e0ae5f9d06e9fa3c9e09f87bb88ecc4cf3848'})
+
+    issues_MI = requests.get("https://grist.ej1899.com/api/docs/7BSTDSBvrBZSQhuc3FsLhA/sql?q=SELECT COUNT(Description) FROM Issues WHERE Status = 'Open' AND Manager = 10", headers={
+        'Authorization': 'Bearer f33e0ae5f9d06e9fa3c9e09f87bb88ecc4cf3848'})
+    
+    nod_MI = requests.get("https://grist.ej1899.com/api/docs/7BSTDSBvrBZSQhuc3FsLhA/sql?q=SELECT COUNT(Description) FROM Notice_of_Delay WHERE OPEN_Status = 'OPEN' AND PM = 'MI' AND Days_Outstanding < 0", headers={
         'Authorization': 'Bearer f33e0ae5f9d06e9fa3c9e09f87bb88ecc4cf3848'})
 
     MI_open_changes = open_changes_MI.json()['records'][0]['fields']['COUNT(Description)']
     MI_open_rfis = rfi_MI.json()['records'][0]['fields']['COUNT(Number)']
     MI_open_submittals = submittals_MI.json()['records'][0]['fields']['COUNT(Description)']
     correspondence_MI = correspondence_MI.json()['records'][0]['fields']['COUNT(Number)']
-    return render_template('MI.html', change=MI_open_changes, rfi=MI_open_rfis, submittal=MI_open_submittals, corr=correspondence_MI)
+    issues_MI = issues_MI.json()['records'][0]['fields']['COUNT(Description)']
+    nod_MI = nod_MI.json()['records'][0]['fields']['COUNT(Description)']
+    return render_template('MI.html', change=MI_open_changes, rfi=MI_open_rfis, submittal=MI_open_submittals, corr=correspondence_MI, issues=issues_MI, nodValue=nod_MI)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -102,11 +102,15 @@
     <div class="info" id="rfiMessage"></div>
     <div class="info" id="submittalMessage"></div>
     <div class="info" id="correspondenceMessage"></div>
+    <div class="info" id="issueMessage"></div>
+    <div class="info" id="nodMessage"></div>
     <div class="button-container">
-        <a id="openChangesButton" href="#" data-change="{{ change }}">View Open Changes</a>
-        <a id="openRFIButton" href="#" data-change="{{ rfi }}">View Open RFIs</a>
-        <a id="openSubmittalButton" href="#" data-change="{{ submittal }}">View Open Submittals</a>
-        <a id="openCorrespondenceButton" href="#" data-change="{{ corr }}">View Open Correspondence</a>
+        <a id="openChangesButton" href="#" data-change="{{ change }}"> Open Changes</a>
+        <a id="openRFIButton" href="#" data-change="{{ rfi }}"> Open RFIs</a>
+        <a id="openSubmittalButton" href="#" data-change="{{ submittal }}"> Open Submittals</a>
+        <a id="openCorrespondenceButton" href="#" data-change="{{ corr }}"> Open Correspondence</a>
+        <a id="openIssuesButton" href="#" data-change="{{ issues }}"> Open Issues</a>
+        <a id="openNodButton" href="#" data-change="{{ nodValue }}"> Outstanding NOD</a>
     </div>
     <footer>
         &copy; 2025 MI Page. All rights reserved.
@@ -136,6 +140,18 @@
         // Set the inner HTML of the correspondenceMessage element
         correspondenceMessage.innerHTML = 'There are <span>{{ corr }}</span> correspondences that are open';
 
+        // Get the issueMessage element
+        const issueMessage = document.getElementById('issueMessage');
+
+        // Set the inner HTML of the issueMessage element
+        issueMessage.innerHTML = 'There are <span>{{ issues }}</span> issues that are open';
+
+        // Get the nodMessage element
+        const nodMessage = document.getElementById('nodMessage');
+
+        // Set the inner HTML of the nodMessage element
+        nodMessage.innerHTML = 'There are <span>{{ nodValue }}</span> outstanding NODs';
+
         // Get the openChangesButton element
         const openChangesButton = document.getElementById('openChangesButton');
 
@@ -146,7 +162,7 @@
         const changeValue = parseInt(openChangesButton.getAttribute('data-change'), 10);
 
         // Update the button text with the change count
-        openChangesButton.innerHTML = `View Open Changes (${changeValue})`;
+        openChangesButton.innerHTML = ` Open Changes (${changeValue})`;
 
         // Check if the change value is too high and update the button's style
         if (changeValue > 5) { // Replace 5 with the threshold value
@@ -157,13 +173,13 @@
         const openRFIButton = document.getElementById('openRFIButton');
 
         // Set the href attribute of the openRFIButton element
-        openRFIButton.href = 'https://example.com/open-rfis'; // Replace with the actual URL
+        openRFIButton.href = 'https://grist.ej1899.com/7BSTDSBvrBZS/Master-Database/p/251'; // Replace with the actual URL
 
         // Get the rfi value from the data attribute
         const rfiValue = parseInt(openRFIButton.getAttribute('data-change'), 10);
 
         // Update the button text with the rfi count
-        openRFIButton.innerHTML = `View Open RFIs (${rfiValue})`;
+        openRFIButton.innerHTML = ` Open RFIs (${rfiValue})`;
 
         // Check if the rfi value is too high and update the button's style
         if (rfiValue > 5) { // Replace 5 with the threshold value
@@ -174,13 +190,13 @@
         const openSubmittalButton = document.getElementById('openSubmittalButton');
 
         // Set the href attribute of the openSubmittalButton element
-        openSubmittalButton.href = 'https://example.com/open-submittals'; // Replace with the actual URL
+        openSubmittalButton.href = 'https://grist.ej1899.com/7BSTDSBvrBZS/Master-Database/p/251'; // Replace with the actual URL
 
         // Get the submittal value from the data attribute
         const submittalValue = parseInt(openSubmittalButton.getAttribute('data-change'), 10);
 
         // Update the button text with the submittal count
-        openSubmittalButton.innerHTML = `View Open Submittals (${submittalValue})`;
+        openSubmittalButton.innerHTML = ` Open Submittals (${submittalValue})`;
 
         // Check if the submittal value is too high and update the button's style
         if (submittalValue > 5) { // Replace 5 with the threshold value
@@ -191,17 +207,51 @@
         const openCorrespondenceButton = document.getElementById('openCorrespondenceButton');
 
         // Set the href attribute of the openCorrespondenceButton element
-        openCorrespondenceButton.href = 'https://example.com/open-correspondence'; // Replace with the actual URL
+        openCorrespondenceButton.href = 'https://grist.ej1899.com/7BSTDSBvrBZS/Master-Database/p/251'; // Replace with the actual URL
 
         // Get the correspondence value from the data attribute
         const correspondenceValue = parseInt(openCorrespondenceButton.getAttribute('data-change'), 10);
 
         // Update the button text with the correspondence count
-        openCorrespondenceButton.innerHTML = `View Open Correspondence (${correspondenceValue})`;
+        openCorrespondenceButton.innerHTML = ` Open Correspondence (${correspondenceValue})`;
 
         // Check if the correspondence value is too high and update the button's style
         if (correspondenceValue > 5) { // Replace 5 with the threshold value
             openCorrespondenceButton.style.backgroundColor = '#8B0000'; // Dark red color
+        }
+
+        // Get the openIssuesButton element
+        const openIssuesButton = document.getElementById('openIssuesButton');
+
+        // Set the href attribute of the openIssuesButton element
+        openIssuesButton.href = 'https://grist.ej1899.com/7BSTDSBvrBZS/Master-Database/p/251'; // Replace with the actual URL
+
+        // Get the issues value from the data attribute
+        const issuesValue = parseInt(openIssuesButton.getAttribute('data-change'), 10);
+
+        // Update the button text with the issues count
+        openIssuesButton.innerHTML = ` Open Issues (${issuesValue})`;
+
+        // Check if the issues value is too high and update the button's style
+        if (issuesValue > 5) { // Replace 5 with the threshold value
+            openIssuesButton.style.backgroundColor = '#8B0000'; // Dark red color
+        }
+
+        // Get the openNodButton element
+        const openNodButton = document.getElementById('openNodButton');
+
+        // Set the href attribute of the openNodButton element
+        openNodButton.href = 'https://grist.ej1899.com/7BSTDSBvrBZS/Master-Database/p/251'; // Replace with the actual URL
+
+        // Get the nod value from the data attribute
+        const nodValue = parseInt(openNodButton.getAttribute('data-change'), 10);
+
+        // Update the button text with the nod count
+        openNodButton.innerHTML = ` Outstanding NOD (${nodValue})`;
+
+        // Check if the nod value is too high and update the button's style
+        if (nodValue > 5) { // Replace 5 with the threshold value
+            openNodButton.style.backgroundColor = '#8B0000'; // Dark red color
         }
     </script>
 </body>
